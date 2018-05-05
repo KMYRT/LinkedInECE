@@ -176,16 +176,14 @@ if (isset($_POST['modif_profil'])){
 
               <div class="col-md-6">
                   <h3>Modifiez votre profil</h3>
-
-                    <form method="post" class="needs-validation" action="trtm_inscr.php">
-                         <div>
+                            <div>
                              <label>Photo de profil</label>
 
                                 <form method="post"  action="profilmodif.php">
                                     <img src="images/<?php echo $_SESSION['profilpic']; ?>" alt="photoprofil" width="100" height="100" />
                                         <form action="" method="POST" enctype="multipart/form-data">
                                             <input type="file" name="photoprofil" />
-                                    </form>
+                                        </form>
                                         <div>
                                             <label for="prenom">Prenom</label>
                                             <input type="text" class="form-control" value="<?php echo $_SESSION['prenom'] ?>" name="prenom" placeholder="" value="" required>
@@ -227,9 +225,11 @@ if (isset($_POST['modif_profil'])){
                                           </div>
                                           <hr class="mb-4">
                                             <a href="profil.php"><button class="btn btn-success btn-lg " name="modif_profil" type="submit">Modifier</button></a>
-                                        </form>
-                                  <div>
-                                    <div>
+
+                                </form>
+                        </div>
+            </div>
+                 <div class="col-md-6">
                                          <section>
                                         <br>
                                         <div class="bloc1">
@@ -267,26 +267,32 @@ if (isset($_POST['modif_profil'])){
                                         </div>
                                     </section>
 
+
                                     </div>
                                 </div>
                         </div>
                   </form>
 
 
-                            <br>
-                            <br>
-                            <br>
+                                </div>
+>>>>>>> origin/master
 
-                            <footer class="my-5 pt-5 text-muted text-center text-small">
-                                <p class="mb-1">&copy; 2017-2018 ECE Student's</p>
-                                <ul class="list-inline">
-                                  <li class="list-inline-item"><a href="#">Privacy</a></li>
-                                  <li class="list-inline-item"><a href="#">Terms</a></li>
-                                  <li class="list-inline-item"><a href="#">Support</a></li>
-                                </ul>
-                              </footer>
 
-                        </html>
+            <br>
+            <br>
+            <br>
+
+            <footer class="my-5 pt-5 text-muted text-center text-small">
+                <p class="mb-1">&copy; 2017-2018 ECE Student's</p>
+                <ul class="list-inline">
+                  <li class="list-inline-item"><a href="#">Privacy</a></li>
+                  <li class="list-inline-item"><a href="#">Terms</a></li>
+                  <li class="list-inline-item"><a href="#">Support</a></li>
+                </ul>
+              </footer>
+        </div>
+    </body>
+</html>
 
 
 
