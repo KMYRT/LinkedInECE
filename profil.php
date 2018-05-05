@@ -150,6 +150,7 @@ if (isset($_POST['publier']) && $publication!=NULL){
                     <div class="bloc">
                         <h2>@<?php echo $_SESSION['prenom'] ?></h2>
                         <p><br><?php echo $publi['contenu'] ?></p>
+                        <p></p>
                     </div>
                     <?php
                         }
