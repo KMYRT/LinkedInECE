@@ -1,6 +1,13 @@
 <?php
 session_start();
-
+try {
+        $pdo = new PDO('mysql:host=localhost;dbname=web','root','root',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+        if($pdo!=0){
+            echo 'Connexion reussie';
+        }
+    }catch (PDOException $e) {
+        echo 'Erreur connexion BDD'.$e->getMessage();
+    }
 ?>
 
 <!doctype html>
@@ -12,7 +19,69 @@ session_start();
     <meta name="author" content="">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="icon" href="../../../../favicon.ico">
+    <style>
 
+            .bloc3 {
+                padding-top: 5px;
+                padding-left: 5px;
+                padding-bottom: 5px;
+                padding-right: 5px;
+                margin-bottom: 20px;
+                margin-top: 20px;
+            }
+            .bloc2 {
+                padding-top: 5px;
+                padding-left: 5px;
+                padding-bottom: 5px;
+                padding-right: 5px;
+                float:left;
+                width:300px;
+                height: auto;
+            }
+            .bloc1 {
+              margin-left:30em;
+              text-align:center;
+                padding-top: 10px;
+                padding-left: 10px;
+                padding-bottom: 10px;
+                padding-right: 10px;
+                float:auto;
+                width:420px;
+                height:auto;
+                -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
+                -moz-box-shadow: 0 0 20px #555;
+                -webkit-box-shadow: 0 0 20px #555;
+                box-shadow: 0 0 20px #555;
+            }
+            .bloc {
+                padding-top: 5px;
+                padding-left: 5px;
+                padding-bottom: 5px;
+                padding-right: 5px;
+                margin-bottom: 20px;
+                margin-top: 20px;
+                -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
+                -moz-box-shadow: 0 0 20px #555;
+                -webkit-box-shadow: 0 0 20px #555;
+                box-shadow: 0 0 20px #555;
+                width:400px;
+            }
+            .bloc h2 {
+                margin:auto;
+                padding:5px;
+                font-size:1.5em;
+                color:#fff;
+                background-color:#9DADC6;
+                border:1px solid #8E98A4;
+                border-bottom:0;
+                -webkit-border-radius: 10px 10px 0 0;
+                -moz-border-radius: 10px 10px 0 0;
+                border-radius: 10px 10px 0 0;
+            }
+
+      </style>
     <title>Mon réseau</title>
 
    <!-- <link href="bootstrap.min.css" rel="stylesheet">-->
@@ -43,66 +112,35 @@ session_start();
         </div>
       </nav>
 
+      <section>
+                <br>
+                <div class="bloc1">
+                <h3> Publications </h3>
+                    <div class="bloc3">
+                        <form method="post" action="profil.php">
+                            <label for="publication">Entrez votre publication... </label>
+                            <input type="text" class="form-control" name="publication" placeholder="" value=""><br>
+                            <button class=" btn btn-xs btn-primary" type="submit" name="publier">Publier</button>
+                        </form>
 
-    <div class="nav-scroller bg-white box-shadow">
-      <nav class="nav nav-underline">
 
-          <a class="nav-link" href="#">Amis
-          <span class="badge badge-pill bg-light align-text-bottom">1</span>
-        </a>
+                    </div>
 
-        <a class="nav-link" href="#">Recherche</a>
-        <a class="nav-link" href="#">Suggestions</a>
-        <a class="nav-link" href="#">Demandes en attente</a>
-      </nav>
-    </div>
+                <?php $req_publi = $pdo->query('SELECT utilisateur.nom, utilisateur.prenom, publication.contenu FROM utilisateur INNER JOIN publication ON utilisateur.id_utilisateur=publication.id_utilisateur');
+                      while ($publi = $req_publi->fetch())
+			          {
 
-    <main role="main" class="container">
-      <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded box-shadow">
-        <img class="mr-3" src="https://getbootstrap.com/assets/brand/bootstrap-outline.svg" alt="" width="48" height="48">
-        <div class="lh-100">
-          <h6 class="mb-0 text-white lh-100">Mon réseau</h6>
-          <small>LinkedECE</small>
-        </div>
-      </div>
-
-      <div class="my-3 p-3 bg-white rounded box-shadow">
-        <h6 class="border-bottom border-gray pb-2 mb-0">Suggestions</h6>
-        <div class="media text-muted pt-3">
-          <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="" class="mr-2 rounded">
-          <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-            <div class="d-flex justify-content-between align-items-center w-100">
-              <strong class="text-gray-dark">Full Name</strong>
-              <a href="#">Ajouter</a>
-            </div>
-            <span class="d-block">@username</span>
-          </div>
-        </div>
-        <div class="media text-muted pt-3">
-          <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="" class="mr-2 rounded">
-          <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-            <div class="d-flex justify-content-between align-items-center w-100">
-              <strong class="text-gray-dark">Full Name</strong>
-              <a href="#">Ajouter</a>
-            </div>
-            <span class="d-block">@username</span>
-          </div>
-        </div>
-        <div class="media text-muted pt-3">
-          <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="" class="mr-2 rounded">
-          <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-            <div class="d-flex justify-content-between align-items-center w-100">
-              <strong class="text-gray-dark">Full Name</strong>
-              <a href="#">Ajouter</a>
-            </div>
-            <span class="d-block">@username</span>
-          </div>
-        </div>
-        <small class="d-block text-right mt-3">
-          <a href="#">All suggestions</a>
-        </small>
-      </div>
-    </main>
+                        if($publi['contenu']!=NULL){ ?>
+                    <div class="bloc">
+                        <h2>@<?php echo $publi['prenom'] ?></h2>
+                        <p><br><?php echo $publi['contenu'] ?></p>
+                    </div>
+                    <?php
+                        }
+                      }
+                      ?>
+                </div>
+            </section>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -114,4 +152,16 @@ session_start();
     <script src="../../assets/js/vendor/holder.min.js"></script>
     <script src="offcanvas.js"></script>
   </body>
+    <br>
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <hr class="mb-4">
+        <p class="mb-1">&copy; 2017-2018 ECE Student's</p>
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="#">Privacy</a></li>
+          <li class="list-inline-item"><a href="#">Terms</a></li>
+          <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+      </footer>
+
 </html>

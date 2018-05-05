@@ -74,8 +74,7 @@ $pdo = new PDO('mysql:host=localhost;dbname=web','root','root',array(PDO::ATTR_E
              <div class="container">
 
                 <?php $req_photo = $pdo->prepare('SELECT contenu FROM photos INNER JOIN possederPhoto ON photos.id_photo=possederPhoto.id_photo WHERE possederPhoto.id_utilisateur = ?');
-                $req_photo->execute(array($_SESSION['id_utilisateur'])); ?>
-                 <?php
+                $req_photo->execute(array($_SESSION['id_utilisateur']));
 
                 while ($photo = $req_photo->fetch()){
 
