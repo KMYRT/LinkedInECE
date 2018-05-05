@@ -88,7 +88,7 @@ try {
                     <?php echo $ami['prenom'],' ', $ami['nom'] ;?>
                       <div>
                         <img class="card-img-top" src="images/<?php echo $ami['profil_pic']; ?>" alt="Card image cap" height="150" width="150" />
-                        <button type="button" class="btn btn-sm btn-outline-secondary" name="btn">Ajouter</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary" name="btn<?php $ami['id_utilisateur']  ?>">Ajouter</button>
                       </div>
                     </div>
             </div>

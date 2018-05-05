@@ -243,8 +243,38 @@ if (isset($_POST['modif_profil'])){
                                         <p><br><?php echo $publi['contenu'] ?></p>
                                         <form method="post" action="profilmodif.php">
                                         <input type="text" id="inputModif" value="<?php echo $publi['contenu'] ?>" width=150 class="form-control" name="modif_publi" required>
-                                        <button class=" btn btn-xs btn-primary" type="submit" name="modifier">Modifier</button>
-                                        <button class=" btn btn-xs btn-primary" type="submit" name="supprimer<?php echo $publi['id_publi'] ?>">Supprimer</button>
+                                        <button class=" btn btn-xs btn-primary" type="button" name="modifier" onclick="modif(); return false;">Modifier</button>
+                                        <button class=" btn btn-xs btn-primary" type="button" name="supprimer" onclick="delete(); return false;" >Supprimer</button>
+
+
+<!--
+                                            <script>
+
+                                                function modif()
+                                                {   <?php
+                                                    echo id_publi;
+                                                    $req1= $pdo->prepare('UPDATE publication SET contenu=? WHERE id_publi=?');
+                                                    $req1->execute(array($modif_publi,$id_publi));
+                                                    header("Location:profilmodif.php");
+                                                    ?>
+                                                }
+
+
+
+
+
+                                            </script>
+-->
+
+
+
+
+
+
+
+
+
+
                                         </form>
                                     </div>
                                     <?php
