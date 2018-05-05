@@ -15,13 +15,13 @@
 <nav class="navbar navbar-inverse navbar-dark bg-dark">
   <div class="container-fluid">
     <ul class="nav navbar-nav">
-      <li><a href="accueil.php"><span class="glyphicon glyphicon-home"> LinkedECE</a></li>
-      <li><a href="profil.php"><span class="glyphicon glyphicon-user"> Profil</a></li>
-      <li><a href="reseaux.php"><span class="glyphicon glyphicon-globe"> Réseaux</a></li>
-      <li><a href="emplois.php"><span class="glyphicon glyphicon-user"> Emplois</a></li>
-      <li><a href="notif.php"><span class="glyphicon glyphicon-bell"> Notifications</a></li>
-      <li><a href="albums.php"><span class="glyphicon glyphicon-picture"> Albums</a></li>
-      <li><a href="messagerie.php"><span class="glyphicon glyphicon-envelope"> Messagerie</a></li>
+        <li><a href="accueil.php"><span class="glyphicon glyphicon-home"> LinkedECE</span></a></li>
+      <li><a href="profil.php"><span class="glyphicon glyphicon-user"> Profil</span></a></li>
+      <li><a href="reseaux.php"><span class="glyphicon glyphicon-globe"> Réseaux</span></a></li>
+      <li><a href="emplois.php"><span class="glyphicon glyphicon-user"> Emplois</span></a></li>
+      <li><a href="notif.php"><span class="glyphicon glyphicon-bell"> Notifications</span></a></li>
+      <li><a href="albums.php"><span class="glyphicon glyphicon-picture"> Albums</span></a></li>
+      <li><a href="messagerie.php"><span class="glyphicon glyphicon-envelope"> Messagerie</span></a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="register.php"><span class="glyphicon glyphicon-user"></span> Inscription </a></li>
@@ -35,18 +35,12 @@
 
           <div class="container">
             <div class="py-5 text-center">
-              <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
               <h2>Inscription</h2>
               <p class="lead">Inscrivez vous sur notre site de mise en réseau interne à l'ECE</p>
             </div>
             <div class="row">
               <div class="col-md-8 order-md-1">
                 <h4 class="mb-3">Coordonnées</h4>
-                <form action="trtm_inscr.php" method="post" enctype="multipart/form-data">
-                    Choisissez votre photo de profil :
-                    <input type="file" name="fileToUpload" id="fileToUpload">
-                    <input type="submit" value="Upload Image" name="submit">
-                </form>
                 <form method="post" class="needs-validation" action="trtm_inscr.php">
                   <div class="row">
                     <div class="col-md-6 mb-3">

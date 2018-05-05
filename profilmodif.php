@@ -31,41 +31,44 @@ if (isset($_POST['modif_profil'])){
     $_SESSION['date_naissance']=$_POST['dateNaissance'];
     $_SESSION['pseudo']=$_POST['pseudo'];
     $_SESSION['telephone']=$_POST['telephone'];
+    $_SESSION['profilpic']=$filename;
 
 
-    $req_modif = $pdo->prepare('UPDATE utilisateur SET nom = ?, prenom = ?, email = ?, date_naissance = ?, pseudo = ?, adresse = ?, telephone = ? WHERE id_utilisateur = ?');
-    $req_modif->execute(array($_SESSION['nom'],$_SESSION['prenom'],$_SESSION['email'],$_SESSION['date_naissance'],$_SESSION['pseudo'],$_SESSION['adresse'],$_SESSION['telephone'],$_SESSION['id_utilisateur']));
+    $req_modif = $pdo->prepare('UPDATE utilisateur SET nom = ?, prenom = ?, email = ?, date_naissance = ?, pseudo = ?, adresse = ?, telephone = ?, profil_pic = ? WHERE id_utilisateur = ?');
+    $req_modif->execute(array($_SESSION['nom'],$_SESSION['prenom'],$_SESSION['email'],$_SESSION['date_naissance'],$_SESSION['pseudo'],$_SESSION['adresse'],$_SESSION['telephone'],$_SESSION['id_utilisateur'],$_SESSION['profilpic']));
 
     header("Location:profil.php");
 }
 
 
+$filename = false;
+if(isset($_FILES['photoprofil'])){
+  $errors= array();
+  $file_name = $_FILES['photoprofil']['name'];
+  $file_size =$_FILES['photoprofil']['size'];
+  $file_tmp =$_FILES['photoprofil']['tmp_name'];
+  $file_type=$_FILES['photoprofil']['type'];
+  $file_ext=strtolower(end(explode('.',$_FILES['photoprofil']['name'])));
 
-   if(isset($_FILES['photoprofil'])){
-      $errors= array();
-      $file_name = $_FILES['photoprofil']['name'];
-      $file_size =$_FILES['photoprofil']['size'];
-      $file_tmp =$_FILES['photoprofil']['tmp_name'];
-      $file_type=$_FILES['photoprofil']['type'];
-      $file_ext=strtolower(end(explode('.',$_FILES['photoprofil']['name'])));
+  $expensions= array("jpeg","jpg","png");
 
-      $expensions= array("jpeg","jpg","png");
+  if(in_array($file_ext,$expensions)=== false){
+     $errors[]="extension not allowed, please choose a JPEG or PNG file.";
+  }
 
-      if(in_array($file_ext,$expensions)=== false){
-         $errors[]="extension not allowed, please choose a JPEG or PNG file.";
-      }
+  if($file_size > 2097152){
+     $errors[]='File size must be excately 2 MB';
+  }
 
-      if($file_size > 2097152){
-         $errors[]='File size must be excately 2 MB';
-      }
+  if(empty($errors)==true){
+     move_uploaded_file($file_tmp,"images/".$file_name);
+     echo "Success";
+  }else{
+     print_r($errors);
+  }
+  $filename = $file_name;
 
-      if(empty($errors)==true){
-         move_uploaded_file($file_tmp,"../images/".$file_name);
-         echo "Success";
-      }else{
-         print_r($errors);
-      }
-   }
+}
 
 
 ?>
