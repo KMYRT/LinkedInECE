@@ -272,7 +272,15 @@ if (isset($_POST['modif_profil'])){
                                         </div>
                                     </section>
 
+
+                                    </div>
                                 </div>
+                        </div>
+                  </form>
+
+
+                                </div>
+>>>>>>> origin/master
 
 
             <br>
