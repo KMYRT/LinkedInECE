@@ -29,6 +29,13 @@ if (isset($_POST['supprimer'])){
 }
 
 if (isset($_POST['modif_profil'])){
+    $_SESSION['email']="";
+    $_SESSION['nom']="";
+    $_SESSION['adresse']="";
+    $_SESSION['prenom']="";
+    $_SESSION['date_naissance']="";
+    $_SESSION['pseudo']="";
+    $_SESSION['telephone']="";
 
     $_SESSION['email']= $_POST['email'];
     $_SESSION['nom']=$_POST['nom'];
@@ -39,13 +46,11 @@ if (isset($_POST['modif_profil'])){
     $_SESSION['telephone']=$_POST['telephone'];
 
 
+    echo $_SESSION['email'];
+
     $req_modif = $pdo->prepare('UPDATE utilisateur SET nom = ?, prenom = ?, email = ?, date_naissance = ?, pseudo = ?, adresse = ?, telephone = ? WHERE id_utilisateur = ?');
     $req_modif->execute(array($_SESSION['nom'],$_SESSION['prenom'],$_SESSION['email'],$_SESSION['date_naissance'],$_SESSION['pseudo'],$_SESSION['adresse'],$_SESSION['telephone'],$_SESSION['id_utilisateur']));
-    $id_publi =$req_publi['id_publi'];
-    echo id_publi;
 
-    $req1= $pdo->prepare('UPDATE publication SET contenu=? WHERE id_publi=?');
-    $req1->execute(array($modif_publi,$id_publi));
     header("Location:profil.php");
 }
 
@@ -179,9 +184,9 @@ if (isset($_POST['modif_profil'])){
                             <div>
                              <label>Photo de profil</label>
 
-                                <form method="post"  action="profilmodif.php">
+                                <form method="post" class="needs-validation" action="profilmodif.php">
                                     <img src="images/<?php echo $_SESSION['profilpic']; ?>" alt="photoprofil" width="100" height="100" />
-                                        <form action="" method="POST" enctype="multipart/form-data">
+                                        <form action="" method="post"  enctype="multipart/form-data">
                                             <input type="file" name="photoprofil" />
                                         </form>
                                         <div>
@@ -207,7 +212,7 @@ if (isset($_POST['modif_profil'])){
 
                                           <div class="mb-3">
                                             <label for="adresse">Addresse</label>
-                                            <input type="text" class="form-control" value="<?php echo $_SESSION['adresse'] ?>" name="adresse" placeholder="" required>
+                                            <input type="text" class="form-control" value="<?php echo $_SESSION['adresse'] ?>" name="adresse" required>
                                           </div>
 
                                           <div class="row">
@@ -224,7 +229,7 @@ if (isset($_POST['modif_profil'])){
                                               </div>
                                           </div>
                                           <hr class="mb-4">
-                                            <a href="profil.php"><button class="btn btn-success btn-lg " name="modif_profil" type="submit">Modifier</button></a>
+                                            <button class="btn btn-success btn-lg " name="modif_profil" type="submit">Modifier</button>
 
                                 </form>
                         </div>
