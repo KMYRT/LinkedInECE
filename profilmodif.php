@@ -179,11 +179,8 @@ if (isset($_POST['modif_profil'])){
                             <div>
                              <label>Photo de profil</label>
 
-                                <form method="post"  action="profilmodif.php">
+                                <form method="post" action="profilmodif.php">
                                     <img src="images/<?php echo $_SESSION['profilpic']; ?>" alt="photoprofil" width="100" height="100" />
-                                        <form action="" method="POST" enctype="multipart/form-data">
-                                            <input type="file" name="photoprofil" />
-                                        </form>
                                         <div>
                                             <label for="prenom">Prenom</label>
                                             <input type="text" class="form-control" value="<?php echo $_SESSION['prenom'] ?>" name="prenom" placeholder="" value="" required>
@@ -224,68 +221,52 @@ if (isset($_POST['modif_profil'])){
                                               </div>
                                           </div>
                                           <hr class="mb-4">
-                                            <a href="profil.php"><button class="btn btn-success btn-lg " name="modif_profil" type="submit">Modifier</button></a>
+                                            <a href="profilmodif.php"><button class="btn btn-success btn-lg " name="modif_profil" type="submit">Modifier</button></a>
 
                                 </form>
                         </div>
             </div>
                  <div class="col-md-6">
-                                         <section>
-                                        <br>
-                                        <div class="bloc1">
-                                        <h3> Publications </h3>
-                                            <div class="bloc3">
-                                                <form method="post" action="profil.php">
-                                                    <label for="publication">Entrez votre publication... </label>
-                                                    <input type="text" class="form-control" name="publication" placeholder="" value=""><br>
-                                                    <button class=" btn btn-xs btn-primary" type="submit" name="publier">Publier</button>
-                                                </form>
-
-
-                                            </div>
-
-                                        <?php $req_publi = $pdo->prepare('SELECT * FROM publication WHERE id_utilisateur = ?');
-                                              $req_publi->execute(array($_SESSION['id_utilisateur']));
-                                              while ($publi = $req_publi->fetch())
-                                              {
-
-
-                                                if($publi['contenu']!=NULL){ ?>
-                                            <div class="bloc">
-                                                <h2>@<?php echo $_SESSION['prenom'] ?></h2>
-                                                <p><br><?php echo $publi['contenu'] ?></p>
-                                                <form method="post" action="profilmodif.php">
-                                                <input type="text" id="inputModif" value="<?php echo $publi['contenu'] ?> " width=150 class="form-control" name="modif_publi" required>
-                                                <button class=" btn btn-xs btn-primary" type="submit" name="modifer">Modifier</button>
-                                                <button class=" btn btn-xs btn-primary" type="submit" name="supprimer">Supprimer</button>
-                                                </form>
-                                            </div>
-                                            <?php
-                                                }
-                                              }
-                                              ?>
-                                        </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                            </section>
-=======
-                                    </section>
->>>>>>> affb384b99a59bc53e057c43c72d1a78874d2f5c
+                        <section>
+                                <br>
+                                <div class="bloc1">
+                                <h3> Publications </h3>
+                                    <div class="bloc3">
+                                        <form method="post" action="profil.php">
+                                            <label for="publication">Entrez votre publication... </label>
+                                            <input type="text" class="form-control" name="publication" placeholder="" value=""><br>
+                                            <button class=" btn btn-xs btn-primary" type="submit" name="publier">Publier</button>
+                                        </form>
 
 
                                     </div>
+
+                                <?php $req_publi = $pdo->prepare('SELECT * FROM publication WHERE id_utilisateur = ?');
+                                      $req_publi->execute(array($_SESSION['id_utilisateur']));
+                                      while ($publi = $req_publi->fetch())
+                                      {
+
+
+                                        if($publi['contenu']!=NULL){ ?>
+                                    <div class="bloc">
+                                        <h2>@<?php echo $_SESSION['prenom'] ?></h2>
+                                        <p><br><?php echo $publi['contenu'] ?></p>
+                                        <form method="post" action="profilmodif.php">
+                                        <input type="text" id="inputModif" value="<?php echo $publi['contenu'] ?> " width=150 class="form-control" name="modif_publi" required>
+                                        <button class=" btn btn-xs btn-primary" type="submit" name="modifer">Modifier</button>
+                                        <button class=" btn btn-xs btn-primary" type="submit" name="supprimer">Supprimer</button>
+                                        </form>
+                                    </div>
+                                    <?php
+                                        }
+                                      }
+                                      ?>
                                 </div>
-                        </div>
-                  </form>
 
+                        </section>
+            </div>
+        </div>
 
-                                </div>
-
-=======
-                                    </section>
-
-                                </div>
->>>>>>> parent of c4b0c69... Merge remote-tracking branch 'origin/master'
 
 
             <br>
@@ -300,7 +281,6 @@ if (isset($_POST['modif_profil'])){
                   <li class="list-inline-item"><a href="#">Support</a></li>
                 </ul>
               </footer>
-        </div>
     </body>
 </html>
 
