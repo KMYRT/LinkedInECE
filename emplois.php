@@ -15,7 +15,7 @@ session_start();
 
     <title>Mon réseau</title>
 
-    <link href="bootstrap.min.css" rel="stylesheet">
+   <!-- <link href="bootstrap.min.css" rel="stylesheet">-->
 
 
 
@@ -48,7 +48,7 @@ session_start();
       <nav class="nav nav-underline">
 
           <a class="nav-link" href="#">Amis
-          <span class="badge badge-pill bg-light align-text-bottom">27</span>
+          <span class="badge badge-pill bg-light align-text-bottom">1</span>
         </a>
 
         <a class="nav-link" href="#">Recherche</a>

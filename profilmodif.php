@@ -6,9 +6,6 @@ $publication=$_POST['publication'];
 $modif_publi=$_POST['modif_publi'];
 
 if (isset($_POST['modifier'])){
-    $req_publi = $pdo->prepare('SELECT * FROM publication WHERE id_utilisateur = ?');
-    $req_publi->execute(array($_SESSION['id_utilisateur']));
-    $id_publi =$req_publi['id_publi'];
     echo id_publi;
 
     $req1= $pdo->prepare('UPDATE publication SET contenu=? WHERE id_publi=?');
@@ -17,10 +14,7 @@ if (isset($_POST['modifier'])){
 }
 
 
-if (isset($_POST[])){
-    $req_publi = $pdo->prepare('SELECT * FROM publication WHERE id_utilisateur = ?');
-    $req_publi->execute(array($_SESSION['id_utilisateur']));
-    $id_publi =$publi['id_publi'];
+if (isset($_POST['supprimer'])){
 
 
     $req1= $pdo->prepare('DELETE FROM publication WHERE id_publi=?');
@@ -41,11 +35,7 @@ if (isset($_POST['modif_profil'])){
 
     $req_modif = $pdo->prepare('UPDATE utilisateur SET nom = ?, prenom = ?, email = ?, date_naissance = ?, pseudo = ?, adresse = ?, telephone = ? WHERE id_utilisateur = ?');
     $req_modif->execute(array($_SESSION['nom'],$_SESSION['prenom'],$_SESSION['email'],$_SESSION['date_naissance'],$_SESSION['pseudo'],$_SESSION['adresse'],$_SESSION['telephone'],$_SESSION['id_utilisateur']));
-    $id_publi =$req_publi['id_publi'];
-    echo id_publi;
 
-    $req1= $pdo->prepare('UPDATE publication SET contenu=? WHERE id_publi=?');
-    $req1->execute(array($modif_publi,$id_publi));
     header("Location:profil.php");
 }
 
@@ -252,8 +242,9 @@ if (isset($_POST['modif_profil'])){
                                         <h2>@<?php echo $_SESSION['prenom'] ?></h2>
                                         <p><br><?php echo $publi['contenu'] ?></p>
                                         <form method="post" action="profilmodif.php">
-                                        <input type="text" id="inputModif" value="<?php echo $publi['contenu'] ?> " width=150 class="form-control" name="modif_publi" required>
-                                        <button class=" btn btn-xs btn-primary" type="submit" name="<?php echo $publi['id_publi'] ?>">Supprimer</button>
+                                        <input type="text" id="inputModif" value="<?php echo $publi['contenu'] ?>" width=150 class="form-control" name="modif_publi" required>
+                                        <button class=" btn btn-xs btn-primary" type="submit" name="modifier">Modifier</button>
+                                        <button class=" btn btn-xs btn-primary" type="submit" name="supprimer<?php echo $publi['id_publi'] ?>">Supprimer</button>
                                         </form>
                                     </div>
                                     <?php

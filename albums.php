@@ -1,5 +1,6 @@
 <?php
 session_start();
+$pdo = new PDO('mysql:host=localhost;dbname=web','root','root',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
 ?>
 
@@ -15,7 +16,22 @@ session_start();
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="jquery.min.js"></script>
   <script src="bootstrap.min.js"></script>
-
+      <style>
+          .bloc {
+            padding-top: 5px;
+            padding-left: 5px;
+            padding-bottom: 5px;
+            padding-right: 5px;
+            margin-bottom: 20px;
+            margin-top: 20px;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            -moz-box-shadow: 0 0 20px #555;
+            -webkit-box-shadow: 0 0 20px #555;
+            box-shadow: 0 0 20px #555;
+            width:auto;
+          }
+      </style>
 
     <title>Albums Photos</title>
 
@@ -50,35 +66,42 @@ session_start();
         <div class="container">
           <h2 class="jumbotron-heading">Album example</h2>
         </div>
-      </section>
-        <div class="container">
+          <div>
+            <form>
 
-            <div class="col-md-12">
+              </form>
+          </div>
+             <div class="container">
+
                 <?php $req_photo = $pdo->prepare('SELECT contenu FROM photos INNER JOIN possederPhoto ON photos.id_photo=possederPhoto.id_photo WHERE possederPhoto.id_utilisateur = ?');
-                $req_photo->execute(array($_SESSION['id_utilisateur']));
-                echo 'aaaaa';
-                while ($photo = $req_photo->fetch())
-			          {
-                        echo 'eafeq';
+                $req_photo->execute(array($_SESSION['id_utilisateur'])); ?>
+                 <?php
+
+                while ($photo = $req_photo->fetch()){
 
                         if($photo!=NULL){
-          ?>
-                  <div class="bloc">
-                    <p><?php echo $_SESSION['prenom'] ?></p>
-                    <p><br><?php echo $publi['contenu'] ?></p>
-                    <img src="images/<?php echo $photo['contenu']; ?>" width="200" height="200" />
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Aimer</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Commenter</button>
+                ?>
+                  <div class="col-md-4">
+                    <div class="bloc">
+                    <img src="images/photos/<?php echo $photo['contenu']; ?>" width="200" height="200" />
+                      <div>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Aimer</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Commenter</button>
+                      </div>
+                      </div>
                     </div>
-                    <?php
+                      <?php
                         }
                       }
-                      ?>
-            </div>
+                     ?>
+
           </div>
+      </section>
+
 
 
     <footer class="my-5 pt-5 text-muted text-center text-small">
+        <hr class="mb-4">
         <p class="mb-1">&copy; 2017-2018 ECE Student's</p>
         <ul class="list-inline">
           <li class="list-inline-item"><a href="#">Privacy</a></li>

@@ -164,6 +164,7 @@ if (isset($_POST['publier']) && $publication!=NULL){
     <br>
 
     <footer class="my-5 pt-5 text-muted text-center text-small">
+        <hr class="mb-4">
         <p class="mb-1">&copy; 2017-2018 ECE Student's</p>
         <ul class="list-inline">
           <li class="list-inline-item"><a href="#">Privacy</a></li>
