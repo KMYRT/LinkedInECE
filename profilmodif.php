@@ -273,11 +273,17 @@ if (isset($_POST['modifprofil'])){
                                               }
                                               ?>
                                         </div>
+<<<<<<< HEAD
                             </section>
 
 
                     </div>
 
+=======
+                                    </section>
+
+                                </div>
+>>>>>>> parent of c4b0c69... Merge remote-tracking branch 'origin/master'
 
         </div>
     </body>
