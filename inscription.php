@@ -42,11 +42,6 @@
             <div class="row">
               <div class="col-md-8 order-md-1">
                 <h4 class="mb-3">Coordonnées</h4>
-                <form action="trtm_inscr.php" method="post" enctype="multipart/form-data">
-                    Choisissez votre photo de profil :
-                    <input type="file" name="fileToUpload" id="fileToUpload">
-                    <input type="submit" value="Upload Image" name="submit">
-                </form>
                 <form method="post" class="needs-validation" action="trtm_inscr.php">
                   <div class="row">
                     <div class="col-md-6 mb-3">
