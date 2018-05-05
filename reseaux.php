@@ -88,6 +88,34 @@ try {
                     <?php echo $ami['prenom'],' ', $ami['nom'] ;?>
                       <div>
                         <img class="card-img-top" src="images/<?php echo $ami['profil_pic']; ?>" alt="Card image cap" height="150" width="150" />
+                          </div>
+                    </div>
+            </div>
+           <?php
+                }
+              }
+           ?>
+        </div>
+      </section>
+
+<!--      Suggestions -->
+       <section class="jumbotron text-center">
+        <div class="container">
+          <h2 class="jumbotron-heading">Suggestions</h2>
+        </div>
+        <div class="container">
+            <?php
+              $req_ami = $pdo->prepare('');
+              $req_ami->execute(array($_SESSION['id_utilisateur']));
+              while ($ami = $req_ami->fetch())
+              {
+                if($ami!=NULL){
+            ?>
+                  <div class="col-md-4">
+                    <div class="bloc">
+                    <?php echo $ami['prenom'],' ', $ami['nom'] ;?>
+                      <div>
+                        <img class="card-img-top" src="images/<?php echo $ami['profil_pic']; ?>" alt="Card image cap" height="150" width="150" />
                         <button type="button" class="btn btn-sm btn-outline-secondary" name="btn<?php $ami['id_utilisateur']  ?>">Ajouter</button>
                       </div>
                     </div>
