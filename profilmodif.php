@@ -28,7 +28,10 @@ if (isset($_POST['supprimer'])){
     header("Location:profil.php");
 }
 
-if (isset($_POST['modif_profil'])){
+echo 'aaaaa';
+if (isset($_POST['modifprofil'])){
+
+    echo 'bbbb';
     $_SESSION['email']="";
     $_SESSION['nom']="";
     $_SESSION['adresse']="";
@@ -229,13 +232,13 @@ if (isset($_POST['modif_profil'])){
                                               </div>
                                           </div>
                                           <hr class="mb-4">
-                                            <button class="btn btn-success btn-lg " name="modif_profil" type="submit">Modifier</button>
+                                            <button class="btn btn-success btn-lg " name="modifprofil" type="submit">Modifier</button>
 
                                 </form>
                         </div>
             </div>
                  <div class="col-md-6">
-                                         <section>
+                        <section>
                                         <br>
                                         <div class="bloc1">
                                         <h3> Publications </h3>
@@ -270,24 +273,21 @@ if (isset($_POST['modif_profil'])){
                                               }
                                               ?>
                                         </div>
-                                    </section>
+                            </section>
 
 
-                                    </div>
-                                </div>
-                        </div>
-                  </form>
+                    </div>
 
 
-                                </div>
->>>>>>> origin/master
-
+        </div>
+    </body>
 
             <br>
             <br>
             <br>
 
             <footer class="my-5 pt-5 text-muted text-center text-small">
+                <hr class="mb-4">
                 <p class="mb-1">&copy; 2017-2018 ECE Student's</p>
                 <ul class="list-inline">
                   <li class="list-inline-item"><a href="#">Privacy</a></li>
@@ -295,8 +295,7 @@ if (isset($_POST['modif_profil'])){
                   <li class="list-inline-item"><a href="#">Support</a></li>
                 </ul>
               </footer>
-        </div>
-    </body>
+
 </html>
 
 
