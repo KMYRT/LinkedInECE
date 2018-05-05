@@ -275,7 +275,7 @@ if (isset($_POST['modif_profil'])){
 
 
                                 </div>
->>>>>>> origin/master
+
 
 
             <br>
