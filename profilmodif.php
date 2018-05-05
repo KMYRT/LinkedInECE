@@ -49,6 +49,35 @@ if (isset($_POST['modif_profil'])){
     header("Location:profil.php");
 }
 
+
+
+   if(isset($_FILES['photoprofil'])){
+      $errors= array();
+      $file_name = $_FILES['photoprofil']['name'];
+      $file_size =$_FILES['photoprofil']['size'];
+      $file_tmp =$_FILES['photoprofil']['tmp_name'];
+      $file_type=$_FILES['photoprofil']['type'];
+      $file_ext=strtolower(end(explode('.',$_FILES['photoprofil']['name'])));
+
+      $expensions= array("jpeg","jpg","png");
+
+      if(in_array($file_ext,$expensions)=== false){
+         $errors[]="extension not allowed, please choose a JPEG or PNG file.";
+      }
+
+      if($file_size > 2097152){
+         $errors[]='File size must be excately 2 MB';
+      }
+
+      if(empty($errors)==true){
+         move_uploaded_file($file_tmp,"images/".$file_name);
+         echo "Success";
+      }else{
+         print_r($errors);
+      }
+   }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -152,119 +181,112 @@ if (isset($_POST['modif_profil'])){
                          <div>
                              <label>Photo de profil</label>
 
-             <form method="post"  action="profilmodif.php">
+                                <form method="post"  action="profilmodif.php">
+                                    <img src="images/<?php echo $_SESSION['profilpic']; ?>" alt="photoprofil" width="100" height="100" />
+                                        <form action="" method="POST" enctype="multipart/form-data">
+                                            <input type="file" name="photoprofil" />
+                                    </form>
+                                        <div>
+                                            <label for="prenom">Prenom</label>
+                                            <input type="text" class="form-control" value="<?php echo $_SESSION['prenom'] ?>" name="prenom" placeholder="" value="" required>
+                                        </div>
+                                        <div>
+                                            <label for="nom">Nom</label>
+                                            <input type="text" class="form-control" value="<?php echo $_SESSION['nom'] ?>" name="nom" placeholder="" value="" required>
+                                        </div>
+
+                                        <div>
+                                            <div class="input-group">
+                                                <label for="pseudo">Pseudo</label>
+                                                <input type="text" class="form-control" value="<?php echo $_SESSION['pseudo'] ?>" name="pseudo" placeholder="Pseudo" required>
+                                            </div>
+                                          </div>
+
+                                          <div class="mb-3">
+                                            <label for="email">Email</label>
+                                            <input type="email" class="form-control" value="<?php echo $_SESSION['email'] ?>" name="email" placeholder="you@example.com">
+                                          </div>
+
+                                          <div class="mb-3">
+                                            <label for="adresse">Addresse</label>
+                                            <input type="text" class="form-control" value="<?php echo $_SESSION['adresse'] ?>" name="adresse" placeholder="" required>
+                                          </div>
+
+                                          <div class="row">
+                                            <div class="col-md-5 mb-3">
+                                              <label for="telephone">Telephone</label>
+                                              <input type="text" class="form-control" value="<?php echo $_SESSION['telephone'] ?>" name="telephone" placeholder="06..." required>
+
+                                            </div>
+                                          </div>
+                                          <div class="row">
+                                              <div class="col-md-5 mb-3">
+                                                  <label for="dateNaissance">Date de Naissance</label>
+                                                  <input type="date" class="form-control" value="<?php echo $_SESSION['date_naissance'] ?>" name="dateNaissance" required>
+                                              </div>
+                                          </div>
+                                          <hr class="mb-4">
+                                            <a href="profil.php"><button class="btn btn-success btn-lg " name="modif_profil" type="submit">Modifier</button></a>
+                                        </form>
+                                  <div>
+                                    <div>
+                                         <section>
+                                        <br>
+                                        <div class="bloc1">
+                                        <h3> Publications </h3>
+                                            <div class="bloc3">
+                                                <form method="post" action="profil.php">
+                                                    <label for="publication">Entrez votre publication... </label>
+                                                    <input type="text" class="form-control" name="publication" placeholder="" value=""><br>
+                                                    <button class=" btn btn-xs btn-primary" type="submit" name="publier">Publier</button>
+                                                </form>
 
 
-                                <img src="images/<?php echo $_SESSION['profilpic']; ?>" alt="photoprofil" width="100" height="100" />
+                                            </div>
 
-                             <input type="image" name="photoprofil" />
-
-
-
-
-
-             <form method="post"  action="profilmodif.php">
+                                        <?php $req_publi = $pdo->prepare('SELECT * FROM publication WHERE id_utilisateur = ?');
+                                              $req_publi->execute(array($_SESSION['id_utilisateur']));
+                                              while ($publi = $req_publi->fetch())
+                                              {
 
 
-                         </div>
-                    <div>
-                      <label for="prenom">Prenom</label>
-                      <input type="text" class="form-control" value="<?php echo $_SESSION['prenom'] ?>" name="prenom" placeholder="" value="" required>
-                    </div>
-                    <div>
-                      <label for="nom">Nom</label>
-                      <input type="text" class="form-control" value="<?php echo $_SESSION['nom'] ?>" name="nom" placeholder="" value="" required>
-                    </div>
+                                                if($publi['contenu']!=NULL){ ?>
+                                            <div class="bloc">
+                                                <h2>@<?php echo $_SESSION['prenom'] ?></h2>
+                                                <p><br><?php echo $publi['contenu'] ?></p>
+                                                <form method="post" action="profilmodif.php">
+                                                <input type="text" id="inputModif" value="<?php echo $publi['contenu'] ?> " width=150 class="form-control" name="modif_publi" required>
+                                                <button class=" btn btn-xs btn-primary" type="submit" name="modifer">Modifier</button>
+                                                <button class=" btn btn-xs btn-primary" type="submit" name="supprimer">Supprimer</button>
+                                                </form>
+                                            </div>
+                                            <?php
+                                                }
+                                              }
+                                              ?>
+                                        </div>
+                                    </section>
 
-                  <div>
-                    <div class="input-group">
-                        <label for="pseudo">Pseudo</label>
-                        <input type="text" class="form-control" value="<?php echo $_SESSION['pseudo'] ?>" name="pseudo" placeholder="Pseudo" required>
-                    </div>
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" value="<?php echo $_SESSION['email'] ?>" name="email" placeholder="you@example.com">
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="adresse">Addresse</label>
-                    <input type="text" class="form-control" value="<?php echo $_SESSION['adresse'] ?>" name="adresse" placeholder="" required>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-5 mb-3">
-                      <label for="telephone">Telephone</label>
-                      <input type="text" class="form-control" value="<?php echo $_SESSION['telephone'] ?>" name="telephone" placeholder="06..." required>
-
-                    </div>
-                  </div>
-                  <div class="row">
-                      <div class="col-md-5 mb-3">
-                          <label for="dateNaissance">Date de Naissance</label>
-                          <input type="date" class="form-control" value="<?php echo $_SESSION['date_naissance'] ?>" name="dateNaissance" required>
-                      </div>
-                  </div>
-                  <hr class="mb-4">
-                    <a href="profil.php"><button class="btn btn-success btn-lg " name="modif_profil" type="submit">Modifier</button></a>
-                </form>
-          </div>
-            <div>
-                 <section>
-                <br>
-                <div class="bloc1">
-                <h3> Publications </h3>
-                    <div class="bloc3">
-                        <form method="post" action="profil.php">
-                            <label for="publication">Entrez votre publication... </label>
-                            <input type="text" class="form-control" name="publication" placeholder="" value=""><br>
-                            <button class=" btn btn-xs btn-primary" type="submit" name="publier">Publier</button>
-                        </form>
+                                    </div>
+                                     </div>
+                        </div>
+                  </form></div>
 
 
-                    </div>
+                            <br>
+                            <br>
+                            <br>
 
-                <?php $req_publi = $pdo->prepare('SELECT * FROM publication WHERE id_utilisateur = ?');
-                      $req_publi->execute(array($_SESSION['id_utilisateur']));
-                      while ($publi = $req_publi->fetch())
-			          {
+                            <footer class="my-5 pt-5 text-muted text-center text-small">
+                                <p class="mb-1">&copy; 2017-2018 ECE Student's</p>
+                                <ul class="list-inline">
+                                  <li class="list-inline-item"><a href="#">Privacy</a></li>
+                                  <li class="list-inline-item"><a href="#">Terms</a></li>
+                                  <li class="list-inline-item"><a href="#">Support</a></li>
+                                </ul>
+                              </footer>
 
-
-                        if($publi['contenu']!=NULL){ ?>
-                    <div class="bloc">
-                        <h2>@<?php echo $_SESSION['prenom'] ?></h2>
-                        <p><br><?php echo $publi['contenu'] ?></p>
-                        <form method="post" action="profilmodif.php">
-                        <input type="text" id="inputModif" value="<?php echo $publi['contenu'] ?> " width=150 class="form-control" name="modif_publi" required>
-                        <button class=" btn btn-xs btn-primary" type="submit" name="modifer">Modifier</button>
-                        <button class=" btn btn-xs btn-primary" type="submit" name="supprimer">Supprimer</button>
-                        </form>
-                    </div>
-                    <?php
-                        }
-                      }
-                      ?>
-                </div>
-            </section>
-
-            </div>
-             </div>
-    </body>
-    <br>
-    <br>
-    <br>
-
-    <footer class="my-5 pt-5 text-muted text-center text-small">
-        <p class="mb-1">&copy; 2017-2018 ECE Student's</p>
-        <ul class="list-inline">
-          <li class="list-inline-item"><a href="#">Privacy</a></li>
-          <li class="list-inline-item"><a href="#">Terms</a></li>
-          <li class="list-inline-item"><a href="#">Support</a></li>
-        </ul>
-      </footer>
-
-</html>
+                        </html>
 
 
 
