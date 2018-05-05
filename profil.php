@@ -32,12 +32,16 @@ if (isset($_POST['publier']) && $publication!=NULL){
             }
             .bloc2 {
                 padding-top: 5px;
-                padding-left: 5px;
+                padding-left: 30px;
                 padding-bottom: 5px;
                 padding-right: 5px;
                 float:left;
-                width:300px;
+                width:400px;
                 height: auto;
+                -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
+                -moz-box-shadow: 0 0 20px #555;
+                -webkit-box-shadow: 0 0 20px #555;
             }
             .bloc1 {
                 padding-top: 5px;
