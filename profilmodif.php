@@ -17,7 +17,7 @@ if (isset($_POST['modifier'])){
 }
 
 
-if (isset($_POST['supprimer'])){
+if (isset($_POST[])){
     $req_publi = $pdo->prepare('SELECT * FROM publication WHERE id_utilisateur = ?');
     $req_publi->execute(array($_SESSION['id_utilisateur']));
     $id_publi =$publi['id_publi'];
@@ -253,8 +253,7 @@ if (isset($_POST['modif_profil'])){
                                         <p><br><?php echo $publi['contenu'] ?></p>
                                         <form method="post" action="profilmodif.php">
                                         <input type="text" id="inputModif" value="<?php echo $publi['contenu'] ?> " width=150 class="form-control" name="modif_publi" required>
-                                        <button class=" btn btn-xs btn-primary" type="submit" name="modifer">Modifier</button>
-                                        <button class=" btn btn-xs btn-primary" type="submit" name="supprimer">Supprimer</button>
+                                        <button class=" btn btn-xs btn-primary" type="submit" name="<?php echo $publi['id_publi'] ?>">Supprimer</button>
                                         </form>
                                     </div>
                                     <?php

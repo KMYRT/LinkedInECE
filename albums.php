@@ -20,7 +20,7 @@ session_start();
     <title>Albums Photos</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="bootstrap.min.css" rel="stylesheet">
+
 
   </head>
 
@@ -46,40 +46,37 @@ session_start();
         </nav>
     </header>
 
-    <main role="main">
-
       <section class="jumbotron text-center">
         <div class="container">
-          <h1 class="jumbotron-heading">Album example</h1>
-          <p>
-            <a href="#" class="btn btn-primary my-2">Main call to action</a>
-            <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-          </p>
+          <h2 class="jumbotron-heading">Album example</h2>
         </div>
       </section>
-
-      <div class="album py-5 bg-light">
         <div class="container">
 
-          <div class="row">
-            <div class="col-md-4">
-              <div class="card mb-4 box-shadow">
-                <img class="card-img-top" src="images/defaultpic.png" alt="Card image cap"/>
-                <div class="card-body">
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Ajouter</button>
+            <div class="col-md-12">
+                <?php $req_photo = $pdo->prepare('SELECT contenu FROM photos INNER JOIN possederPhoto ON photos.id_photo=possederPhoto.id_photo WHERE possederPhoto.id_utilisateur = ?');
+                $req_photo->execute(array($_SESSION['id_utilisateur']));
+                echo 'aaaaa';
+                while ($photo = $req_photo->fetch())
+			          {
+                        echo 'eafeq';
+
+                        if($photo!=NULL){
+          ?>
+                  <div class="bloc">
+                    <p><?php echo $_SESSION['prenom'] ?></p>
+                    <p><br><?php echo $publi['contenu'] ?></p>
+                    <img src="images/<?php echo $photo['contenu']; ?>" width="200" height="200" />
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Aimer</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Commenter</button>
                     </div>
-                    <small class="text-muted">9 mins</small>
-                  </div>
-                </div>
-              </div>
+                    <?php
+                        }
+                      }
+                      ?>
             </div>
           </div>
-        </div>
-      </div>
 
-    </main>
 
     <footer class="my-5 pt-5 text-muted text-center text-small">
         <p class="mb-1">&copy; 2017-2018 ECE Student's</p>
