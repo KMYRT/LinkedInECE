@@ -7,6 +7,11 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="jquery.min.js"></script>
   <script src="bootstrap.min.js"></script>
+  <style>
+      body{
+          background-image: url(images/photos/bg.png);
+      }
+  </style>
 </head>
 <body>
 
