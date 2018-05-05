@@ -28,7 +28,6 @@ if (isset($_POST['supprimer'])){
     header("Location:profil.php");
 }
 
-echo 'aaaaa';
 if (isset($_POST['modifprofil'])){
 
     echo 'bbbb';
