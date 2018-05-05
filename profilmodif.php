@@ -60,7 +60,7 @@ if (isset($_POST['modif_profil'])){
       }
 
       if(empty($errors)==true){
-         move_uploaded_file($file_tmp,"images/".$file_name);
+         move_uploaded_file($file_tmp,"../images".$file_name);
          echo "Success";
       }else{
          print_r($errors);
@@ -168,6 +168,10 @@ if (isset($_POST['modif_profil'])){
                   <h3>Modifiez votre profil</h3>
                             <div>
                              <label>Photo de profil</label>
+                                <form action="trtm_inscr.php" method="post" enctype="multipart/form-data">
+                                    <input type="file" name="photoprofil">
+
+                                </form>
 
                                 <form method="post" action="profilmodif.php">
                                     <img src="images/<?php echo $_SESSION['profilpic']; ?>" alt="photoprofil" width="100" height="100" />
