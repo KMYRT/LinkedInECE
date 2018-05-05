@@ -80,7 +80,10 @@ if (isset($_POST['publier']) && $publication!=NULL){
                 -moz-border-radius: 10px 10px 0 0;
                 border-radius: 10px 10px 0 0;
             }
-
+            #modifp {
+                padding-top: 10px;
+                margin-top: 10px;
+            }
 
         </style>
       <script src="jquery.min.js"></script>
@@ -121,7 +124,21 @@ if (isset($_POST['publier']) && $publication!=NULL){
                           <li> Date de naissance : <?php echo $_SESSION['date_naissance'] ?></li>
                           <li>Adresse  : <?php echo $_SESSION['adresse'] ?></li>
                           <li>Email : <?php echo $_SESSION['email'] ?></li>
-                          <a href="profilmodif.php"><button class=" btn btn-lg btn-primary" name="modifier_profil">Modifier votre profil</button></a>
+                              <?php
+                                $req_cv = $pdo->prepare('SELECT contenu FROM cv INNER JOIN possederCV ON cv.id_cv=possederCV.id_cv WHERE possederCV.id_utilisateur = ?');
+                                $req_cv->execute(array($_SESSION['id_utilisateur']));
+
+                                 $cv = $req_cv->fetch();
+
+                                if($cv!=NULL){
+                              ?>
+                          <div>
+                            <img src="cv/<?php echo $cv['contenu'] ; ?>" alt="cv" width="300" height="600" />
+                          </div>
+                          <?php
+                                    }
+                        ?>
+                          <a href="profilmodif.php"><button class=" btn btn-lg btn-primary" name="modifier_profil" id="modifp">Modifier votre profil</button></a>
                       </div>
                   </ul>
 
@@ -144,8 +161,6 @@ if (isset($_POST['publier']) && $publication!=NULL){
                       $req_publi->execute(array($_SESSION['id_utilisateur']));
                       while ($publi = $req_publi->fetch())
 			          {
-
-
                         if($publi['contenu']!=NULL){ ?>
                     <div class="bloc">
                         <h2>@<?php echo $_SESSION['prenom'] ?></h2>
@@ -160,9 +175,6 @@ if (isset($_POST['publier']) && $publication!=NULL){
         </div>
         </body>
     <br>
-    <br>
-    <br>
-
     <footer class="my-5 pt-5 text-muted text-center text-small">
         <hr class="mb-4">
         <p class="mb-1">&copy; 2017-2018 ECE Student's</p>
