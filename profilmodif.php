@@ -268,9 +268,9 @@ if (isset($_POST['modif_profil'])){
                                     </section>
 
                                     </div>
-                                     </div>
+                                </div>
                         </div>
-                  </form></div>
+                  </form>
 
 
                             <br>
